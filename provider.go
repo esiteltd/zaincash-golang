@@ -1,12 +1,13 @@
 package zaincash_golang
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
+	"strings"
 )
 
 const (
@@ -41,15 +42,20 @@ type Provider struct {
 }
 
 func (p *Provider) Send_CreateTransaction(ctx context.Context, tx Transaction) (id string, err error) {
-	jbody, err := json.Marshal(tx)
+	t, err := tx.Sign(p.MerchantSecret)
 	if err != nil {
-		return "", fmt.Errorf("encode transaction: %w", err)
+		return "", fmt.Errorf("encode token: %w", err)
 	}
+
+	data := url.Values{}
+	data.Set("token", url.QueryEscape(t))
+	data.Set("merchantId", p.MerchantID)
+	data.Set("lang", p.Language)
 
 	req, err := http.NewRequestWithContext(
 		ctx, http.MethodPost,
 		fmt.Sprintf("https://%s%s", p.Host, CreateTransactionEndpoint),
-		bytes.NewBuffer(jbody),
+		strings.NewReader(data.Encode()),
 	)
 	if err != nil {
 		return "", fmt.Errorf("create request: %w", err)

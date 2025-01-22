@@ -16,8 +16,8 @@ type Transaction struct {
 	jwt.RegisteredClaims
 }
 
-func (t *Transaction) Sign() (string, error) {
-	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, *t).SigningString()
+func (t *Transaction) Sign(key string) (string, error) {
+	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, *t).SignedString([]byte(key))
 	if err != nil {
 		return "", fmt.Errorf("signing token: %v", err)
 	}
