@@ -24,7 +24,7 @@ func TestCreateTransaction(t *testing.T) {
 		ServiceType:       "A book",
 		WalletPhoneNumber: 9647835077893,
 		OrderID:           "for example",
-		RedirectionURL:    "redirection url",
+		RedirectionURL:    "http://localhost",
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
 			IssuedAt:  jwt.NewNumericDate(time.Now())},
