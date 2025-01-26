@@ -30,7 +30,7 @@ func TestCreateTransaction(t *testing.T) {
 			IssuedAt:  jwt.NewNumericDate(time.Now())},
 	}
 
-	id, err := p.Send_CreateTransaction(t.Context(), tx)
+	id, err := p.CreateTransaction(t.Context(), tx)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -47,7 +47,7 @@ func TestCheckTransaction(t *testing.T) {
 		HTTPClient:     http.DefaultClient,
 	}
 
-	id, err := p.Send_CreateTransaction(t.Context(), zaincash.Transaction{
+	id, err := p.CreateTransaction(t.Context(), zaincash.Transaction{
 		Amount:            1000,
 		ServiceType:       "A book",
 		WalletPhoneNumber: 9647835077893,

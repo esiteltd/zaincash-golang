@@ -41,7 +41,7 @@ type Provider struct {
 	}
 }
 
-func (p *Provider) Send_CreateTransaction(ctx context.Context, tx Transaction) (id string, err error) {
+func (p *Provider) CreateTransaction(ctx context.Context, tx Transaction) (id string, err error) {
 	t, err := tx.Sign(p.MerchantSecret)
 	if err != nil {
 		return "", fmt.Errorf("encode token: %w", err)
