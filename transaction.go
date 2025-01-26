@@ -7,6 +7,7 @@ import (
 )
 
 type Transaction struct {
+	ID                string `json:"id,omitempty"`
 	Amount            int64  `json:"amount,omitempty"`
 	ServiceType       string `json:"serviceType,omitempty"`
 	WalletPhoneNumber int64  `json:"msisdn,omitempty"`
