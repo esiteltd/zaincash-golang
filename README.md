@@ -45,7 +45,7 @@ func main() {
 			IssuedAt:  jwt.NewNumericDate(time.Now())},
 	}
 
-	id, err := p.Send_CreateTransaction(context.Background(), tx)
+	id, err := p.CreateTransaction(context.Background(), tx)
 	if err != nil {
 		log.Fatal(err)
 	}
